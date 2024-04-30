@@ -15,7 +15,8 @@ func main() {
 	fmt.Printf("We have a total of %v tickets and %v still avaiable.\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 
-	for {
+	for remainingTickets > 0 && len(bookings) < 50 {
+		//NOTE:You can also put condition in for loop to keep iterating as long as condition is true
 		var firstName string
 		var lastName string
 		var email string
@@ -33,33 +34,41 @@ func main() {
 		fmt.Println("Enter your number of tickets: ")
 		fmt.Scan(&userTickets)
 
-		if userTickets > remainingTickets {
-			fmt.Printf("Sorry there are only %v tickets available\n", remainingTickets)
-		} else {
+		//Validate user input
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail := strings.Contains(email, "@") //Check if the email input contain "@"
+		isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+
+		// isValidCity := city == "Singapore" || city == "London"
+		// Or operator
+
+		if isValidName && isValidEmail && isValidTicketNumber {
 			remainingTickets = remainingTickets - userTickets
 			// bookings[0] = firstName + " " + lastName
 			bookings = append(bookings, firstName+" "+lastName)
 
 			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a conirmation email at at %v\n", firstName, lastName, userTickets, email)
-		}
+			fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 
-		fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+			firstNames := []string{}
+			for _, booking := range bookings {
+				//NOTE:_ are called blank identifier to ignore a variable u dont want to use
 
-		firstNames := []string{}
-		for _, booking := range bookings {
-			//NOTE:_ are called blank identifier to ignore a variable u dont want to use
+				// iterates through all the array element and save the firstName to a slice
+				var names = strings.Fields(booking) //strings.Fields() to split the string
+				firstNames = append(firstNames, names[0])
+			}
+			fmt.Printf("These are all our bookings: %v\n", firstNames)
 
-			// iterates through all the array element and save the firstName to a slice
-			var names = strings.Fields(booking) //strings.Fields() to split the string
-			firstNames = append(firstNames, names[0])
-		}
-		fmt.Printf("These are all our bookings: %v\n", firstNames)
-
-		noTicketsRemaining := remainingTickets == 0 // check if there are no more tickets
-		if noTicketsRemaining {
-			// end program
-			fmt.Println("Our conference is booked out. Come back next time.")
-			break
+			noTicketsRemaining := remainingTickets == 0 // check if there are no more tickets
+			if noTicketsRemaining {
+				// end program
+				fmt.Println("Our conference is booked out. Come back next time.")
+				break
+			}
+		} else {
+			fmt.Println("Your input data is invalid, please try again")
+			// fmt.Printf("Sorry there are only %v tickets available\n", remainingTickets)
 		}
 	}
 }
