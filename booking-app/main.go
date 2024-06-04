@@ -99,6 +99,13 @@ func getUserInput() (string, string, string, uint) {
 
 func bookTicket(userTickets uint, firstName string, lastName string, email string) {
 	remainingTickets = remainingTickets - userTickets
+
+	// create a map for a user
+	var userData = make(map[string]string) //NOTE:You can't mix data types in Go
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+
 	bookings = append(bookings, firstName+" "+lastName)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a conirmation email at at %v\n", firstName, lastName, userTickets, email)
