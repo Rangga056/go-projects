@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -105,6 +106,7 @@ func bookTicket(userTickets uint, firstName string, lastName string, email strin
 	userData["firstName"] = firstName
 	userData["lastName"] = lastName
 	userData["email"] = email
+	strconv.FormatUint(uint64(userTickets), 10) //(uint(the variable), the amount of decimal)
 
 	bookings = append(bookings, firstName+" "+lastName)
 
