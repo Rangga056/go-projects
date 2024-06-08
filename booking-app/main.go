@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 )
 
@@ -10,7 +9,17 @@ const conferenceTickets uint = 50
 
 var conferenceName string = "Go Conference"
 var remainingTickets uint = 50
-var bookings = []string{} //This is a slice
+var bookings = make([]UserData, 0) //This is a slice
+
+// Create a struct in Go
+// Struct  can have mixed data types
+type UserData struct {
+	firstName              string
+	lastName               string
+	email                  string
+	numberOfTickets        uint
+	isOptedInForNewsletter bool
+}
 
 func main() {
 
@@ -62,8 +71,8 @@ func getFirstNames() []string {
 		//NOTE:_ are called blank identifier to ignore a variable u dont want to use
 
 		// iterates through all the array element and save the firstName to a slice
-		var names = strings.Fields(booking) //strings.Fields() to split the string
-		firstNames = append(firstNames, names[0])
+		// var names = strings.Fields(booking) //strings.Fields() to split the string
+		firstNames = append(firstNames, booking.firstName)
 	}
 	return firstNames
 }
@@ -102,13 +111,15 @@ func bookTicket(userTickets uint, firstName string, lastName string, email strin
 	remainingTickets = remainingTickets - userTickets
 
 	// create a map for a user
-	var userData = make(map[string]string) //NOTE:You can't mix data types in Go
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["email"] = email
-	strconv.FormatUint(uint64(userTickets), 10) //(uint(the variable), the amount of decimal)
-
-	bookings = append(bookings, firstName+" "+lastName)
+	var userData = UserData{
+		firstName:       firstName,
+		lastName:        lastName,
+		email:           email,
+		numberOfTickets: userTickets,
+	}
+	//NOTE:You can't mix data types in Go Map
+	bookings = append(bookings, userData)
+	fmt.Printf("List of bookings is %v\n", bookings)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a conirmation email at at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
