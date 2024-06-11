@@ -1,71 +1,58 @@
 # Go Conference Booking Application
 
-## Overview
-
-This Go program simulates a simple conference ticket booking system. It allows users to book tickets, validates their input, and keeps track of the remaining tickets.
+This is a simple conference ticket booking application written in Go. It allows users to book tickets for a conference, validating their input and sending a confirmation email asynchronously using goroutines.
 
 ## Features
 
-- Book tickets for a conference.
-- Validate user input for names, email, and number of tickets.
-- Track the remaining tickets.
-- Display the first names of all users who have booked tickets.
+- User input validation for name, email, and number of tickets.
+- Asynchronous ticket confirmation email sending using goroutines.
+- Concurrent handling of multiple bookings with `sync.WaitGroup`.
+- Simple CLI for booking tickets and viewing current bookings.
 
-## How It Works
+## Getting Started
 
-### Package Declaration
+### Prerequisites
 
-The `main` package is the starting point of a Go program. The `main` function within this package is the entry point of the program.
+- Go 1.16 or higher
 
-### Imports
+### Installing
 
-- `fmt`: Implements formatted I/O with functions analogous to C's printf and scanf.
-- `strings`: Contains functions to manipulate UTF-8 encoded strings.
+1. Clone the repository:
 
-### Global Variables and Constants
-
-- `conferenceTickets`: A constant representing the total number of tickets available.
-- `conferenceName`: A variable holding the name of the conference.
-- `remainingTickets`: A variable representing the number of tickets still available.
-- `bookings`: A slice that stores the names of people who have booked tickets.
-
-### Main Function
-
-1. The `main` function starts by greeting the user.
-2. It enters a loop that continues as long as there are remaining tickets and the number of bookings is less than 50.
-3. The loop prompts the user for their booking details and validates the input.
-4. If the input is valid, it books the ticket and displays the first names of all bookings.
-5. If no tickets remain, it prints a message and breaks the loop.
-
-## Running the Program
-
-1. Install Go from [golang.org](https://golang.org/).
-2. Copy the code into a file named `main.go`.
-3. Open a terminal and navigate to the directory containing `main.go`.
-4. Run the program with the command:
    ```bash
-   go run main.go
+   git clone https://github.com/yourusername/go-conference-booking.git
+   cd go-conference-booking
+
    ```
 
-## Example Usage
+2. Run the application:
 
 ```bash
-Welcome to Go Conference booking application
-We have a total of 50 tickets and 50 are still available.
-Get your tickets here to attend
-
-Enter your first name:
-John
-Enter your last name:
-Doe
-Enter your email:
-john.doe@example.com
-Enter your number of tickets:
-2
-Thank you John Doe for booking 2 tickets. You will receive a confirmation email at john.doe@example.com
-48 tickets remaining for Go Conference
-
-These are all our bookings: [John]
+    go run main.go
 ```
 
-This `README.md` provides an overview of the Go conference booking application, explains how it works, and guides you on how to run the program.
+### Usage
+
+1. Run the application
+
+```bash
+    go run main.go
+```
+
+2. Follow the prompts to enter your first name, last name, email, and number of tickets you wish to book.
+
+3. If the input is valid, your booking will be confirmed, and a confirmation message will be displayed. The application will also simulate sending a ticket to your email address asynchronously.
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Go](https://golang.org/) - The Go programming language
+- [Go Redis](https://github.com/go-redis/redis) - Redis client for Go
+- Inspiration from various Go tutorials and examples.
