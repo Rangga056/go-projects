@@ -43,6 +43,34 @@ This is a simple conference ticket booking application written in Go. It allows 
 
 3. If the input is valid, your booking will be confirmed, and a confirmation message will be displayed. The application will also simulate sending a ticket to your email address asynchronously.
 
+### Example Session
+
+```bash
+$ go run main.go
+
+Welcome to Go Conference booking application
+We have total of 50 tickets and 50 are still available.
+Get your tickets here to attend
+Enter your first name:
+John
+Enter your last name:
+Doe
+Enter your email:
+john.doe@example.com
+Enter your number of tickets:
+2
+List of bookings is [{John Doe john.doe@example.com 2}]
+Thank you John Doe for booking 2 tickets. You will receive a confirmation email at at john.doe@example.com
+48 tickets remaining for Go Conference
+These are all our bookings: [John]
+
+================================================
+Sending ticket:
+2 tickets for John Doe
+to email address john.doe@example.com
+================================================
+```
+
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request.
